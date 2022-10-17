@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       <Container>
         <Box>
           <Heading as="h1" size="2xl" mb={4}>
-            Hello, I'm Rami Maalouf
+            Hello, I&apos;m Rami Maalouf
           </Heading>
         </Box>
       </Container>
