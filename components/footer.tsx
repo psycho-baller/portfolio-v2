@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <Box as="footer" mt={8}>
       <Text textAlign="center">
-        © {new Date().getFullYear()} Rami Maalouf. All rights reserved.
+        © 2022 Rami Maalouf. All rights reserved.
       </Text>
     </Box>
   );

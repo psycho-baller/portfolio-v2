@@ -17,7 +17,7 @@ interface MainI{
     router?: Router | undefined;
 }
 
-const Main = ({ children, router }: MainI) => {
+const Main = ({ children, router}: MainI) => {
     // let tRouter: Router = router || useRouter() as Router;
 
   return (
@@ -29,7 +29,9 @@ const Main = ({ children, router }: MainI) => {
         <meta name="author" content="PsychoCoder" />
         <title>Rami Maalouf - Homepage</title>
       </Head>
-      <NavBar path={(router === undefined) ? "/" : router.asPath} />
+      <NavBar 
+      path={(router === undefined) ? "/" : router.asPath} 
+      />
 
       <Container maxW="container.md" pt={14}>
         {/* <LazyVoxelDog /> */}

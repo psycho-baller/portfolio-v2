@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 // import styles from "../styles/Home.module.css";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Layout from "../components/layouts/main";
+import Layout from "../components/layouts/article";
 
 const Home: NextPage = () => {
   // const router = useRouter() as Router;
