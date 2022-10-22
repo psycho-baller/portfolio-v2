@@ -14,10 +14,11 @@ import {
   MenuButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import type { Router } from "next/router";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { useEffect } from "react";
 
 const LinkItem = ({
   href,
@@ -31,6 +32,7 @@ const LinkItem = ({
 }) => {
   const isCurrentPath = path === href;
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
+
   return (
     <NextLink href={href} passHref scroll={false}>
       <Link
@@ -54,28 +56,68 @@ const LinkItem = ({
 };
 
 const NavBar = ({ path }: { path: string }) => {
-  // const router = useRouter() as Router;
-  // const path = router.pathname;
+  const { scrollY } = useScroll();
+  useEffect(() => {
+    scrollY.onChange((y) => {
+      if (document) {
+        if (y > 450) {
+          // move navbar back down
+          const nav = document.getElementById("navbar");
+          if (nav) {
+            nav.style.top = "0";
+            
+          }
+        } else {
+          // move navbar up
+          const nav = document.getElementById("navbar");
+          if (nav) {
+            nav.style.top = "-80px";
+          }
+        }
+      }
+    });
+  }, []);
+
   return (
-    <Box as="nav" bg="gray.800" color="white" py={4}>
+    <Box
+      position={"sticky"}
+      top={-20}
+      overflow={"hidden"}
+      as={motion.nav}
+      bg="gray.800"
+      color="white"
+      py={4}
+      width="100vw"
+      id="navbar"
+    >
       <Container maxW="container.xl">
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
-            <Heading as="h1" size="lg" letterSpacing="tighter" py={2} px={4}>
+            <Heading
+              position={"absolute"}
+              left={0}
+              top={0}
+              overflow="hidden"
+              whiteSpace={"nowrap"}
+              as="h1"
+              size="lg"
+              letterSpacing="tighter"
+              py={2}
+              px={4}
+            >
               <NextLink href="/">Rami Maalouf</NextLink>
             </Heading>
           </Box>
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            display={{ base: 'none', md: 'flex' }}
-            width={{ base: "full", md: "auto" }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, md: 0 }}
-            // move the links to the right
-            justifyContent={"flex-end"}
+          <Box
+            // minWidth={"100vw"}
+            display={{ base: "none", md: "block" }}
+            // width={{ base: "full", md: "auto" }}
+            // alignItems="center"
+            // flexGrow={1}
+            // mt={{ base: 4, md: 0 }}
           >
-            {/* <Box mr={4}>
+            <Flex justifyContent={"center"} alignItems={"center"}>
+              {/* <Box mr={4}>
                 <LinkItem
                   href="/"
                   path={path}
@@ -87,20 +129,38 @@ const NavBar = ({ path }: { path: string }) => {
                   Home
                 </LinkItem>
               </Box> */}
-            <LinkItem href="/about" path={path}>
-              About
-            </LinkItem>
-            <LinkItem href="/projects" path={path}>
-              Projects
-            </LinkItem>
-            <LinkItem href="/blog" path={path}>
-              Blog
-            </LinkItem>
-          </Stack>
+              <Box mr={4}>
+                <LinkItem href="/#" path={path}>
+                  Home
+                </LinkItem>
+              </Box>
+              <Box mr={4}>
+                <LinkItem href="/#expertise" path={path}>
+                  Expertise
+                </LinkItem>
+              </Box>
+              <Box mr={4}>
+                <LinkItem href="/#work" path={path}>
+                  Work
+                </LinkItem>
+              </Box>
+              <Box mr={4}>
+                <LinkItem href="/#experience" path={path}>
+                  Experience
+                </LinkItem>
+              </Box>
+              <Box mr={4}>
+                <LinkItem href="/#contact" path={path}>
+                  Contact
+                </LinkItem>
+              </Box>
+            </Flex>
+          </Box>
+
           <Box>
             {/* <ThemeToggleButton /> */}
 
-            <Box ml={2} display={{ base: "inline-block", md: "none" }}>
+            <Box display={{ base: "inline-block", md: "none" }}>
               <Menu isLazy id="navbar-menu">
                 <MenuButton
                   as={IconButton}

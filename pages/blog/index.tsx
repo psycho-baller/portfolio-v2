@@ -1,6 +1,5 @@
 import { Box, Container, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { Head } from "next/document";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../../components/layouts/article";
