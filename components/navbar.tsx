@@ -6,7 +6,14 @@ import {
   Text,
   Link,
   useColorModeValue,
+  Stack,
+  MenuList,
+  MenuItem,
+  Menu,
+  IconButton,
+  MenuButton,
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
 import type { Router } from "next/router";
 import { useRouter } from "next/router";
@@ -51,18 +58,24 @@ const NavBar = ({ path }: { path: string }) => {
   // const path = router.pathname;
   return (
     <Box as="nav" bg="gray.800" color="white" py={4}>
-      <Container maxW="container.md">
+      <Container maxW="container.xl">
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
             <Heading as="h1" size="lg" letterSpacing="tighter" py={2} px={4}>
-              <NextLink href="/">
-                Rami Maalouf
-              </NextLink>
+              <NextLink href="/">Rami Maalouf</NextLink>
             </Heading>
           </Box>
-          <Box>
-            <Flex>
-              {/* <Box mr={4}>
+          <Stack
+            direction={{ base: "column", md: "row" }}
+            display={{ base: 'none', md: 'flex' }}
+            width={{ base: "full", md: "auto" }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }}
+            // move the links to the right
+            justifyContent={"flex-end"}
+          >
+            {/* <Box mr={4}>
                 <LinkItem
                   href="/"
                   path={path}
@@ -74,22 +87,49 @@ const NavBar = ({ path }: { path: string }) => {
                   Home
                 </LinkItem>
               </Box> */}
-              <Box mr={4}>
-                <LinkItem href="/about" path={path}>
-                  About
-                </LinkItem>
-              </Box>
-              <Box mr={4}>
-                <LinkItem href="/projects" path={path}>
-                  Projects
-                </LinkItem>
-              </Box>
-              <Box mr={4}>
-                <LinkItem href="/blog" path={path}>
-                  Blog
-                </LinkItem>
-              </Box>
-            </Flex>
+            <LinkItem href="/about" path={path}>
+              About
+            </LinkItem>
+            <LinkItem href="/projects" path={path}>
+              Projects
+            </LinkItem>
+            <LinkItem href="/blog" path={path}>
+              Blog
+            </LinkItem>
+          </Stack>
+          <Box>
+            {/* <ThemeToggleButton /> */}
+
+            <Box ml={2} display={{ base: "inline-block", md: "none" }}>
+              <Menu isLazy id="navbar-menu">
+                <MenuButton
+                  as={IconButton}
+                  icon={<HamburgerIcon />}
+                  variant="outline"
+                  aria-label="Options"
+                />
+                <MenuList>
+                  <NextLink href="/" passHref>
+                    <MenuItem as={Link}>About</MenuItem>
+                  </NextLink>
+                  <NextLink href="/works" passHref>
+                    <MenuItem as={Link}>Works</MenuItem>
+                  </NextLink>
+                  <NextLink href="/posts" passHref>
+                    <MenuItem as={Link}>Posts</MenuItem>
+                  </NextLink>
+                  <NextLink href="https://uses.craftz.dog/" passHref>
+                    <MenuItem as={Link}>Uses</MenuItem>
+                  </NextLink>
+                  <MenuItem
+                    as={Link}
+                    href="https://github.com/craftzdog/craftzdog-homepage"
+                  >
+                    View Source
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
           </Box>
         </Flex>
       </Container>

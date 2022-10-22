@@ -14,6 +14,7 @@ const Home: NextPage = () => {
           <Heading as="h1" size="2xl" mb={4}>
             Hello, I&apos;m Rami Maalouf
           </Heading>
+          
         </Box>
       </Container>
     </Layout>

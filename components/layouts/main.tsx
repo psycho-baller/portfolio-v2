@@ -30,10 +30,10 @@ const Main = ({ children, router}: MainI) => {
         <title>Rami Maalouf - Homepage</title>
       </Head>
       <NavBar 
-      path={(router === undefined) ? "/" : router.asPath} 
+      path={(router === undefined) ? "/" : router.asPath}
       />
 
-      <Container maxW="container.md" pt={14}>
+      <Container maxW="container.2xl" pt={14}>
         {/* <LazyVoxelDog /> */}
 
         {children}

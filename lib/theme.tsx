@@ -9,6 +9,10 @@ const styles = {
   }),
 };
 
+const breakpoints = {
+  md: "38em"
+};
+
 const components = {
   Heading: {
     variants: {
@@ -44,5 +48,5 @@ const config = {
   useSystemColorMode: true,
 };
 
-const theme = extendTheme({ config, styles, components, fonts, colors });
+const theme = extendTheme({ config, styles, components, fonts, colors, breakpoints });
 export default theme;
