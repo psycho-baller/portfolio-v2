@@ -18,6 +18,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { motion, useScroll } from "framer-motion";
 import NextLink from "next/link";
 import { useEffect } from "react";
+import PhoneNavbar from "./phoneNavbar";
 
 const GoTo = ({
   children,
@@ -29,50 +30,31 @@ const GoTo = ({
 }) => {
   // const isCurrentPath = path === href;
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
-  // const id = props.id as string;
   return (
-    <Button
-      as={motion.button}
+    <motion.div
+      // as={motion.div}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={() => {
         if (document) {
-          const home = document.getElementById(id_);
-          if (home) {
-            home.scrollIntoView({ behavior: "smooth" });
+          const _id = document.getElementById(id_);
+          if (_id) {
+            _id.scrollIntoView({ behavior: "smooth" });
           }
         }
       }}
+      // variant="ghost"
+      color={inactiveColor}
       {...props}
     >
       {children}
-    </Button>
-    // <NextLink href={href} passHref scroll={false}>
-    //   <Link
-    //     cursor={"pointer"}
-    //     display="block"
-    //     px={4}
-    //     py={2}
-    //     rounded="md"
-    //     fontWeight="semibold"
-    //     bg={isCurrentPath ? "gray.700" : "transparent"}
-    //     color={isCurrentPath ? "white" : inactiveColor}
-    //     _hover={{
-    //       textDecoration: "none",
-    //       bg: "teal.500",
-    //     }}
-    //     {...props}
-    //   >
-    //     {children}
-    //   </Link>
-    // </NextLink>
+    </motion.div>
   );
 };
 
 const NavBar = ({ path }: { path: string }) => {
   const { scrollY } = useScroll();
   useEffect(() => {
-
     scrollY.onChange((y) => {
       if (document) {
         if (y > 450) {
@@ -80,7 +62,6 @@ const NavBar = ({ path }: { path: string }) => {
           const nav = document.getElementById("navbar");
           if (nav) {
             nav.style.top = "0px";
-            
           }
         } else {
           // move navbar up
@@ -93,12 +74,11 @@ const NavBar = ({ path }: { path: string }) => {
     });
   }, [scrollY]);
 
-
   return (
     <Box
       zIndex={1}
       position={"sticky"}
-      top={-20}
+      top={"-80px"}
       overflow={"hidden"}
       as={motion.nav}
       bg="gray.800"
@@ -106,7 +86,9 @@ const NavBar = ({ path }: { path: string }) => {
       py={4}
       width="100vw"
       id="navbar"
+      // maxHeight={"100vh"}
     >
+
       <Container maxW="container.xl">
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
@@ -115,14 +97,24 @@ const NavBar = ({ path }: { path: string }) => {
               left={0}
               top={0}
               overflow="hidden"
+              cursor={"pointer"}
               whiteSpace={"nowrap"}
               as="h1"
               size="lg"
               letterSpacing="tighter"
               py={2}
               px={4}
+              // bgGradient="linear(to-r, cyan.400, blue.500, purple.600)"
+              onClick={() => {
+                if (document) {
+                  const _id_ = document.getElementById("home");
+                  if (_id_) {
+                    _id_.scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+              }}
             >
-              <NextLink href="/">Rami Maalouf</NextLink>
+              Rami Maalouf
             </Heading>
           </Box>
           <Box
@@ -147,29 +139,19 @@ const NavBar = ({ path }: { path: string }) => {
                 </GoTo>
               </Box> */}
               <Box mr={4}>
-                <GoTo id_="home">
-                  Home
-                </GoTo>
+                <GoTo id_="home">Home</GoTo>
               </Box>
               <Box mr={4}>
-                <GoTo id_="expertise">
-                  Expertise
-                </GoTo>
+                <GoTo id_="expertise">Expertise</GoTo>
               </Box>
               <Box mr={4}>
-                <GoTo id_="work">
-                  Work
-                </GoTo>
+                <GoTo id_="work">Work</GoTo>
               </Box>
               <Box mr={4}>
-                <GoTo id_="experience">
-                  Experience
-                </GoTo>
+                <GoTo id_="experience">Experience</GoTo>
               </Box>
               <Box mr={4}>
-                <GoTo id_="contact">
-                  Contact
-                </GoTo>
+                <GoTo id_="contact">Contact</GoTo>
               </Box>
             </Flex>
           </Box>
@@ -177,8 +159,8 @@ const NavBar = ({ path }: { path: string }) => {
           <Box>
             {/* <ThemeToggleButton /> */}
 
-            <Box display={{ base: "inline-block", md: "none" }}>
-              <Menu isLazy id="navbar-menu">
+            {/* <Box display={{ base: "inline-block", md: "none" }}> */}
+            {/* <Menu isLazy id="navbar-menu">
                 <MenuButton
                   as={IconButton}
                   icon={<HamburgerIcon />}
@@ -186,9 +168,11 @@ const NavBar = ({ path }: { path: string }) => {
                   aria-label="Options"
                 />
                 <MenuList>
-                  <NextLink href="/" passHref>
-                    <MenuItem as={Link}>About</MenuItem>
-                  </NextLink>
+                  {/* <MenuItem> */}
+            {/* <Box mr={4}>
+                    <GoTo id_="home">Home</GoTo>
+                  </Box>
+                  </MenuItem>
                   <NextLink href="/works" passHref>
                     <MenuItem as={Link}>Works</MenuItem>
                   </NextLink>
@@ -205,8 +189,8 @@ const NavBar = ({ path }: { path: string }) => {
                     View Source
                   </MenuItem>
                 </MenuList>
-              </Menu>
-            </Box>
+              </Menu> */}
+            {/* </Box> */}
           </Box>
         </Flex>
       </Container>
@@ -215,3 +199,53 @@ const NavBar = ({ path }: { path: string }) => {
 };
 
 export default NavBar;
+/*
+Scroll to an Element With the Element.scrollIntoView() Method in React:
+This Method accept one argument.
+
+The scrollIntoView() method scrolls an element into the visible area of the browser window.
+
+Syntex:
+
+element.scrollIntoView(align)
+The element.scrollIntoView() accepts a boolean value or an object:
+element.scrollIntoView(alignToTop);
+
+The alignToTop is Boolean value.
+element.scrollIntoView(options);
+
+Options have main 3 properties
+1. block
+2. behavior
+3. inline
+
+1. Block: This Property define vertical alignment. It accept 4 value:
+
+start
+center
+end
+nearest
+By default set value is started.
+
+2. Behavior: behavior property defines the transition animation. It accepts 2 values:
+
+auto
+smooth
+By default set value is auto.
+
+3. Inline: property defines horizontal alignment. It accepts 4 values:
+
+start
+center
+end
+nearest
+By default set value is nearest.
+
+Example:
+
+var element = document.getElementById("box");
+element.scrollIntoView();
+element.scrollIntoView(false);
+element.scrollIntoView({block: "end"});
+element.scrollIntoView({behavior:"smooth", block: "end", inline:"nearest"});
+*/

@@ -1,10 +1,11 @@
 import Head from "next/head";
 // import dynamic from "next/dynamic";
-import NavBar from "../navbar";
+import NavBar from "../navbar/navbar";
 import { Box, Container } from "@chakra-ui/react";
 import Footer from "../footer";
 import type { Router } from "next/router";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import PhoneNavbar from "../navbar/phoneNavbar";
 // import VoxelDogLoader from "../voxel-dog-loader";
 
 // const LazyVoxelDog = dynamic(() => import("../voxel-dog"), {
@@ -12,16 +13,16 @@ import {useRouter} from "next/router";
 //   loading: () => <VoxelDogLoader />,
 // });
 
-interface MainI{
-    children: any;
-    router?: Router | undefined;
+interface MainI {
+  children: any;
+  router?: Router | undefined;
 }
 
-const Main = ({ children, router}: MainI) => {
-    // let tRouter: Router = router || useRouter() as Router;
+const Main = ({ children, router }: MainI) => {
+  // let tRouter: Router = router || useRouter() as Router;
 
   return (
-    <Box as="main" pb={8}>
+    <Box as="main" pb={8} id="home">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Rami's homepage" />
@@ -29,7 +30,8 @@ const Main = ({ children, router}: MainI) => {
         <meta name="author" content="PsychoCoder" />
         <title>Rami Maalouf - Homepage</title>
       </Head>
-      <NavBar path={router === undefined ? "/" : router.asPath} />
+      {/* <NavBar path={router === undefined ? "/" : router.asPath} /> */}
+      <PhoneNavbar />
 
       <Container maxW="container.2xl" pt={14}>
         {/* <LazyVoxelDog /> */}

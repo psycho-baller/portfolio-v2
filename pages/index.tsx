@@ -15,7 +15,6 @@ const Home: NextPage = () => {
     <Layout>
       <Container>
         <Box
-        id="home"
         minHeight={'100vh'}>
           <Heading
             as="h1"
