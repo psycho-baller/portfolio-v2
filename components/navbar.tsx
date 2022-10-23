@@ -12,59 +12,74 @@ import {
   Menu,
   IconButton,
   MenuButton,
+  Button,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { motion, useScroll } from "framer-motion";
-import type { Router } from "next/router";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useEffect } from "react";
 
-const LinkItem = ({
-  href,
-  path,
+const GoTo = ({
   children,
+  id_,
   ...props
 }: {
-  href: string;
-  path: string;
   children: string;
+  id_: string;
 }) => {
-  const isCurrentPath = path === href;
+  // const isCurrentPath = path === href;
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
-
+  // const id = props.id as string;
   return (
-    <NextLink href={href} passHref scroll={false}>
-      <Link
-        display="block"
-        px={4}
-        py={2}
-        rounded="md"
-        fontWeight="semibold"
-        bg={isCurrentPath ? "gray.700" : "transparent"}
-        color={isCurrentPath ? "white" : inactiveColor}
-        _hover={{
-          textDecoration: "none",
-          bg: "teal.500",
-        }}
-        {...props}
-      >
-        {children}
-      </Link>
-    </NextLink>
+    <Button
+      as={motion.button}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={() => {
+        if (document) {
+          const home = document.getElementById(id_);
+          if (home) {
+            home.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      }}
+      {...props}
+    >
+      {children}
+    </Button>
+    // <NextLink href={href} passHref scroll={false}>
+    //   <Link
+    //     cursor={"pointer"}
+    //     display="block"
+    //     px={4}
+    //     py={2}
+    //     rounded="md"
+    //     fontWeight="semibold"
+    //     bg={isCurrentPath ? "gray.700" : "transparent"}
+    //     color={isCurrentPath ? "white" : inactiveColor}
+    //     _hover={{
+    //       textDecoration: "none",
+    //       bg: "teal.500",
+    //     }}
+    //     {...props}
+    //   >
+    //     {children}
+    //   </Link>
+    // </NextLink>
   );
 };
 
 const NavBar = ({ path }: { path: string }) => {
   const { scrollY } = useScroll();
   useEffect(() => {
+
     scrollY.onChange((y) => {
       if (document) {
         if (y > 450) {
           // move navbar back down
           const nav = document.getElementById("navbar");
           if (nav) {
-            nav.style.top = "0";
+            nav.style.top = "0px";
             
           }
         } else {
@@ -76,10 +91,12 @@ const NavBar = ({ path }: { path: string }) => {
         }
       }
     });
-  }, []);
+  }, [scrollY]);
+
 
   return (
     <Box
+      zIndex={1}
       position={"sticky"}
       top={-20}
       overflow={"hidden"}
@@ -118,7 +135,7 @@ const NavBar = ({ path }: { path: string }) => {
           >
             <Flex justifyContent={"center"} alignItems={"center"}>
               {/* <Box mr={4}>
-                <LinkItem
+                <GoTo
                   href="/"
                   path={path}
                   // as={motion.span}
@@ -127,32 +144,32 @@ const NavBar = ({ path }: { path: string }) => {
                   // fontWeight={path === "/" ? "bold" : "normal"}\
                 >
                   Home
-                </LinkItem>
+                </GoTo>
               </Box> */}
               <Box mr={4}>
-                <LinkItem href="/#" path={path}>
+                <GoTo id_="home">
                   Home
-                </LinkItem>
+                </GoTo>
               </Box>
               <Box mr={4}>
-                <LinkItem href="/#expertise" path={path}>
+                <GoTo id_="expertise">
                   Expertise
-                </LinkItem>
+                </GoTo>
               </Box>
               <Box mr={4}>
-                <LinkItem href="/#work" path={path}>
+                <GoTo id_="work">
                   Work
-                </LinkItem>
+                </GoTo>
               </Box>
               <Box mr={4}>
-                <LinkItem href="/#experience" path={path}>
+                <GoTo id_="experience">
                   Experience
-                </LinkItem>
+                </GoTo>
               </Box>
               <Box mr={4}>
-                <LinkItem href="/#contact" path={path}>
+                <GoTo id_="contact">
                   Contact
-                </LinkItem>
+                </GoTo>
               </Box>
             </Flex>
           </Box>
