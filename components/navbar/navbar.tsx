@@ -19,6 +19,7 @@ import { motion, useScroll } from "framer-motion";
 import NextLink from "next/link";
 import { useEffect } from "react";
 import PhoneNavbar from "./phoneNavbar";
+import Logo from "./logo";
 
 const GoTo = ({
   children,
@@ -31,10 +32,12 @@ const GoTo = ({
   // const isCurrentPath = path === href;
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
   return (
-    <motion.div
-      // as={motion.div}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+    <Text
+    // make every other item translucent when one is hovered
+    // animate={{ opacity: isCurrentPath ? 1 : 0.5 }}
+      as={motion.div}
+      // whileHover={{ scale: 1.1 }}
+      // whileTap={{ scale: 0.9 }}
       onClick={() => {
         if (document) {
           const _id = document.getElementById(id_);
@@ -45,10 +48,12 @@ const GoTo = ({
       }}
       // variant="ghost"
       color={inactiveColor}
+      cursor="pointer"
+      
       {...props}
     >
       {children}
-    </motion.div>
+    </Text>
   );
 };
 
@@ -76,6 +81,7 @@ const NavBar = ({ path }: { path: string }) => {
 
   return (
     <Box
+      display={{ base: "none", md: "block" }}
       zIndex={1}
       position={"sticky"}
       top={"-80px"}
@@ -88,34 +94,10 @@ const NavBar = ({ path }: { path: string }) => {
       id="navbar"
       // maxHeight={"100vh"}
     >
-
       <Container maxW="container.xl">
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
-            <Heading
-              position={"absolute"}
-              left={0}
-              top={0}
-              overflow="hidden"
-              cursor={"pointer"}
-              whiteSpace={"nowrap"}
-              as="h1"
-              size="lg"
-              letterSpacing="tighter"
-              py={2}
-              px={4}
-              // bgGradient="linear(to-r, cyan.400, blue.500, purple.600)"
-              onClick={() => {
-                if (document) {
-                  const _id_ = document.getElementById("home");
-                  if (_id_) {
-                    _id_.scrollIntoView({ behavior: "smooth" });
-                  }
-                }
-              }}
-            >
-              Rami Maalouf
-            </Heading>
+           <Logo shiftX={0} shiftY={0} />
           </Box>
           <Box
             // minWidth={"100vw"}

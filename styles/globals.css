@@ -53,7 +53,14 @@ a {
   left: 0;
   bottom: 0;
   right: 0;
+  /* display: flex; */
   /* width: 300px; */
+  /* only show the navbar when the screen is smaller than 768px */
+  /* @media (min-width: 768px) {
+    display: none;
+  } */
+  display: block;
+  
 }
 
 .background {
@@ -62,9 +69,11 @@ a {
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: 1;
 
   /* width: 300px; */
-  background: #fff;
+  /* translucent background */
+  background: rgba(0, 0, 0, 0.6);
 }
 
 button {
@@ -81,12 +90,17 @@ button {
   height: 50px;
   border-radius: 50%;
   background: transparent;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ul,
 li {
   margin: 0;
   padding: 0;
+  z-index: 2;
 }
 
 ul {
