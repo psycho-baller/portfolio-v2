@@ -33,7 +33,7 @@ const Main = ({ children, router }: MainI) => {
       <NavBar path={router === undefined ? "/" : router.asPath} />
       <PhoneNavbar />
 
-      <Container maxW="container.2xl" pt={14}>
+      <Container maxW="container.2xl" pt={16}>
         {/* <LazyVoxelDog /> */}
 
         {children}

@@ -17,7 +17,7 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { motion, useScroll } from "framer-motion";
 import NextLink from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PhoneNavbar from "./phoneNavbar";
 import Logo from "./logo";
 
@@ -33,10 +33,10 @@ const GoTo = ({
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
   return (
     <Text
-    // make every other item translucent when one is hovered
-    // animate={{ opacity: isCurrentPath ? 1 : 0.5 }}
+      // make every other item translucent when one is hovered
+      // animate={{ opacity: isCurrentPath ? 1 : 0.5 }}
       as={motion.div}
-      // whileHover={{ scale: 1.1 }}
+      // whileHover={{ opacity: 2 }}
       // whileTap={{ scale: 0.9 }}
       onClick={() => {
         if (document) {
@@ -46,10 +46,9 @@ const GoTo = ({
           }
         }
       }}
-      // variant="ghost"
+      variant="ghost"
       color={inactiveColor}
       cursor="pointer"
-      
       {...props}
     >
       {children}
@@ -59,8 +58,42 @@ const GoTo = ({
 
 const NavBar = ({ path }: { path: string }) => {
   const { scrollY } = useScroll();
+  const [oneIsHovered, setOneIsHovered] = useState(false);
+  const [twoIsHovered, setTwoIsHovered] = useState(false);
+  const [threeIsHovered, setThreeIsHovered] = useState(false);
+  const [fourIsHovered, setFourIsHovered] = useState(false);
+  const [fiveIsHovered, setFiveIsHovered] = useState(false);
+
+  const [barIsHovered, setBarIsHovered] = useState(false);
+  var oneOpacity = 1;
+  var twoOpacity = 1;
+  var threeOpacity = 1;
+  var fourOpacity = 1;
+  var fiveOpacity = 1;
+  if (barIsHovered) {
+    oneOpacity = 0.5;
+    twoOpacity = 0.5;
+    threeOpacity = 0.5;
+    fourOpacity = 0.5;
+    fiveOpacity = 0.5;
+    if (oneIsHovered) {
+      oneOpacity = 1;
+    }
+    if (twoIsHovered) {
+      twoOpacity = 1;
+    }
+    if (threeIsHovered) {
+      threeOpacity = 1;
+    }
+    if (fourIsHovered) {
+      fourOpacity = 1;
+    }
+    if (fiveIsHovered) {
+      fiveOpacity = 1;
+    }
+  }
   useEffect(() => {
-    scrollY.onChange((y) => {
+    scrollY.onChange((y: number) => {
       if (document) {
         if (y > 450) {
           // move navbar back down
@@ -97,7 +130,7 @@ const NavBar = ({ path }: { path: string }) => {
       <Container maxW="container.xl">
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
-           <Logo shiftX={0} shiftY={0} />
+            <Logo shiftX={0} shiftY={0} />
           </Box>
           <Box
             // minWidth={"100vw"}
@@ -107,7 +140,14 @@ const NavBar = ({ path }: { path: string }) => {
             // flexGrow={1}
             // mt={{ base: 4, md: 0 }}
           >
-            <Flex justifyContent={"center"} alignItems={"center"}>
+            <Flex
+              justifyContent={"center"}
+              alignItems={"center"}
+              onMouseEnter={() => setBarIsHovered(true)}
+              onMouseLeave={() => setBarIsHovered(false)}
+              // as={motion.div}
+              // opacity={0.5}
+            >
               {/* <Box mr={4}>
                 <GoTo
                   href="/"
@@ -120,19 +160,44 @@ const NavBar = ({ path }: { path: string }) => {
                   Home
                 </GoTo>
               </Box> */}
-              <Box mr={4}>
+              <Box
+                pr={4}
+                onMouseEnter={() => setOneIsHovered(true)}
+                onMouseLeave={() => setOneIsHovered(false)}
+                opacity={oneOpacity}
+              >
                 <GoTo id_="home">Home</GoTo>
               </Box>
-              <Box mr={4}>
+              <Box
+                px={4}
+                onMouseEnter={() => setTwoIsHovered(true)}
+                onMouseLeave={() => setTwoIsHovered(false)}
+                opacity={twoOpacity}
+              >
                 <GoTo id_="expertise">Expertise</GoTo>
               </Box>
-              <Box mr={4}>
+              <Box
+                px={4}
+                onMouseEnter={() => setThreeIsHovered(true)}
+                onMouseLeave={() => setThreeIsHovered(false)}
+                opacity={threeOpacity}
+              >
                 <GoTo id_="work">Work</GoTo>
               </Box>
-              <Box mr={4}>
+              <Box
+                px={4}
+                onMouseEnter={() => setFourIsHovered(true)}
+                onMouseLeave={() => setFourIsHovered(false)}
+                opacity={fourOpacity}
+              >
                 <GoTo id_="experience">Experience</GoTo>
               </Box>
-              <Box mr={4}>
+              <Box
+                pl={4}
+                onMouseEnter={() => setFiveIsHovered(true)}
+                onMouseLeave={() => setFiveIsHovered(false)}
+                opacity={fiveOpacity}
+              >
                 <GoTo id_="contact">Contact</GoTo>
               </Box>
             </Flex>
