@@ -1,6 +1,5 @@
 import { Container } from "@chakra-ui/react";
 import type { NextPage } from "next";
-// import styles from "../styles/Home.module.css";
 import { Box, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Layout from "../components/layouts/article";

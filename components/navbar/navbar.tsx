@@ -2,12 +2,14 @@ import {
   Box,
   Container,
   Flex,
+  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion, useScroll } from "framer-motion";
 import { useEffect } from "react";
 import Logo from "./logo";
+import NextLink from "next/link";
 
 const GoTo = ({
   children,
@@ -118,6 +120,23 @@ const NavBar = () => {
               <GoTo id_="work">Work</GoTo>
               <GoTo id_="experience">Experience</GoTo>
               <GoTo id_="contact">Contact</GoTo>
+              <Box className="li" px={4} cursor="pointer">
+                <NextLink href="/me" passHref>
+                <Link
+                  className="me"
+                  as={motion.div}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    
+                  }}
+                  // variant="ghost"
+
+                >
+                  Me
+                </Link>
+                </NextLink>
+              </Box>
             </Flex>
           </Box>
 

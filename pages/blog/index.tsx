@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Layout from "../../components/layouts/article";
+import type { NextPage } from "next";
 
 interface Props {
         title: string;
@@ -12,7 +13,7 @@ interface Props {
 
 
 
-const Blog = () => {
+const Blog: NextPage = () => {
     const posts = [
       {
         title: "First Post",

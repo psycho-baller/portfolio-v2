@@ -30,8 +30,8 @@ const Main = ({ children, router }: MainI) => {
         <meta name="author" content="PsychoCoder" />
         <title>Rami Maalouf - Homepage</title>
       </Head>
-      <NavBar />
-      <PhoneNavbar />
+      {router?.asPath == "/" ? <NavBar /> : null}
+      {router?.asPath == "/" ? <PhoneNavbar /> : null}
 
       <Container maxW="container.2xl" pt={16}>
         {/* <LazyVoxelDog /> */}
