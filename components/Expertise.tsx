@@ -12,6 +12,7 @@ export default function Expertise() {
             as="h2"
             size="xl"
             mb={4}
+            minW="100vw"
             >
                 Expertise
             </Heading>

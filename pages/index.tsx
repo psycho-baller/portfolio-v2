@@ -5,30 +5,26 @@ import { motion } from "framer-motion";
 import Layout from "../components/layouts/article";
 import Contact from "../components/contact";
 import Experience from "../components/experience";
-import Expertise from "../components/Expertise";
+import Expertise from "../components/expertise";
 import Work from "../components/work";
+import Title from "../components/title";
 
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <Container>
-        <Box
-        minHeight={'100vh'}>
-          <Heading
-            as="h1"
-            size={{ base: "md", sm: "xl", md: "2xl" }}
-            mb={4}
-            // overflow="hidden"
-            whiteSpace={"nowrap"}
+      <Container maxW="container.xl">
+        <Box minHeight={"100vh"}>
+          <Title
+            type="h1"
           >
             Hello, I&apos;m Rami Maalouf
-          </Heading>
+          </Title>
         </Box>
         <Expertise />
-        <Work/>
-        <Experience/>
-        <Contact/>
+        <Work />
+        <Experience />
+        <Contact />
       </Container>
     </Layout>
   );

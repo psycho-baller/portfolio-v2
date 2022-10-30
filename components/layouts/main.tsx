@@ -19,7 +19,6 @@ interface MainI {
 }
 
 const Main = ({ children, router }: MainI) => {
-  // let tRouter: Router = router || useRouter() as Router;
 
   return (
     <Box as="main" pb={8} id="home">

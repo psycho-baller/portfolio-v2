@@ -24,7 +24,6 @@ const Layout = ({ children, title }: layoutI) => {
       transition={{ duration: 0.4, type: "easeInOut" }}
       style={{ position: "relative" }}
     >
-      <>
         {title && (
           <Head>
             <title>{t}</title>
@@ -33,7 +32,6 @@ const Layout = ({ children, title }: layoutI) => {
         {children}
 
         {/* <GridItemStyle /> */}
-      </>
     </motion.article>
   );
 };
