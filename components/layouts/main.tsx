@@ -30,7 +30,7 @@ const Main = ({ children, router }: MainI) => {
         <meta name="author" content="PsychoCoder" />
         <title>Rami Maalouf - Homepage</title>
       </Head>
-      <NavBar path={router === undefined ? "/" : router.asPath} />
+      <NavBar />
       <PhoneNavbar />
 
       <Container maxW="container.2xl" pt={16}>

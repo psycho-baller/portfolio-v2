@@ -5,6 +5,7 @@ import { useDimensions } from "../../lib/use-dimensions";
 import { MenuToggle } from "./menuToggle";
 import { Navigation } from "./navigation";
 import Logo from "./logo";
+import useScrollBlock from "../../lib/useScrollBlock";
 const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -29,6 +30,14 @@ function PhoneNavbar() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
+  const [blockScroll, allowScroll] = useScrollBlock();
+  const toggleScroll = () => {
+    if (isOpen) {
+      allowScroll();
+    } else {
+      blockScroll();
+    }
+  };
 
   return (
     <motion.nav
@@ -37,11 +46,17 @@ function PhoneNavbar() {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
+      onClick={() => {
+        toggleOpen()
+        toggleScroll()
+      }}
     >
       <motion.div className="background" variants={sidebar} />
       <Navigation />
-      <MenuToggle toggle={() => toggleOpen()} />
-      <Logo shiftX={61} shiftY={4}/>
+      <MenuToggle 
+      // toggle={() => toggleOpen()} 
+      />
+      <Logo shiftX={61} shiftY={4} />
     </motion.nav>
   );
 }

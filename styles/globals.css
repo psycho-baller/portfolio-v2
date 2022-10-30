@@ -34,8 +34,15 @@ a {
   transition: all 0.5s ease-in-out;
 }
 
-#navbar:hover{
-  
+.li {
+  transition: opacity 0.2s ease-out;
+}
+.ul:hover .li {
+  opacity: 0.5;
+}
+
+.li:hover{
+  opacity: 1 !important;
 }
 
 .body {
@@ -63,8 +70,10 @@ a {
   /* @media (min-width: 768px) {
     display: none;
   } */
-  display: block;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .background {
@@ -86,6 +95,7 @@ button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  user-select: none;
   cursor: pointer;
   position: absolute;
   top: 18px;
@@ -112,6 +122,12 @@ ul {
   position: absolute;
   top: 100px;
   width: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  list-style: none;
 }
 
 li {
@@ -120,9 +136,10 @@ li {
   display: flex;
   align-items: center;
   cursor: pointer;
+  /* font-size: 4rem; */
 }
 
-.icon-placeholder {
+/* .icon-placeholder {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -135,7 +152,7 @@ li {
   width: 200px;
   height: 20px;
   flex: 1;
-}
+} */
 
 .refresh {
   padding: 10px;
